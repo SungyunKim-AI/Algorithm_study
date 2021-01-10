@@ -2,7 +2,29 @@
 #include <string>
 using namespace std;
 
-int mSwitch[10][10] = {0, };
+int mSwitch[10];
+int mCheck[10];
+
+void switchOnOff(int row, int col) {
+    mCheck[row] ^= (1 << (10 - col - 1));
+
+    if (row) {
+        mCheck[row - 1] ^= (1 << (10 - col - 1));
+    }
+    
+    if (row != 9) {
+        mCheck[row + 1] ^= (1 << (10 - col - 1));
+    }
+
+    if (col) {
+        mCheck[row] ^= (1 << (10 - col));
+    }
+
+    if (col != 9) {
+        mCheck[row] ^= (1 << (10 - x - 2));
+    }
+}
+
 
 int main() {
 
@@ -11,21 +33,23 @@ int main() {
         cin >> input;
 
         for (int j = 0; j < 10; j++) {
-            if (input[j] == 'O') { mSwitch[i][j] = 1; }
+            if (input[j] == 'O') { mSwitch[i] |= (1 << j); }
         }
     }
 
-    for (int i = 0; i < 10; i++)
+    int result = 101;
+    for (int candidate = (1 << 10) - 1; candidate >= 0; candidate--)
     {
-        for (int j = 0; j < 10; j++)
+        int count = 0;
+        for (int i = 0; i < 10; i++)
         {
-            cout << mSwitch[i][j];
+            mCheck[i] = mSwitch[i];
         }
-        cout << endl;
+        
+        for(int =0; x < 10; x++)
         
     }
     
-    
-    
+
 
 }

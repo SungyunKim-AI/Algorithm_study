@@ -21,7 +21,7 @@ void switchOnOff(int row, int col) {
     }
 
     if (col != 9) {
-        mCheck[row] ^= (1 << (10 - x - 2));
+        mCheck[row] ^= (1 << (10 - col - 2));
     }
 }
 
@@ -46,7 +46,7 @@ int main() {
             mCheck[i] = mSwitch[i];
         }
         
-        for(int =0; x < 10; x++)
+        for(int col = 1; x < 10; x++)
         
     }
     

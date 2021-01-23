@@ -24,7 +24,7 @@ int main() {
     for (int M = 1; M <= N; M++)
     {
         vector<int> picked;
-        makeString(N, picked, M);      
+        makeString(N, picked, M);     
     }
     cout << result.size();
     return 0;

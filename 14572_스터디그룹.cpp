@@ -13,7 +13,7 @@ struct Student {
 bool cmp(const Student & a, const Student & b) {
     if (a.d < b.d) return true;
     else if (a.d == b.d) {
-        if (a.M <= b.M) return true;
+        if (a.M < b.M) return true;
     }
     return false;
 }
@@ -30,6 +30,9 @@ int difCalculater(int arrK[31], int N) {
 }
 
 int main() {
+    //입출력 시간 줄이기
+    ios::sync_with_stdio(0);
+    cin.tie(0), cout.tie(0);
     
     int N, K, D;    //학생의 수 (1<= N <= 10^5), 알고리즘 수 (1<= K <= 30), 학생들의 실력 차이 (0 <= D <= 10^9)
     vector<Student> students;   //student 구조체 vector
@@ -52,7 +55,7 @@ int main() {
     //조건 1 : 그룹 내에서 가장 잘 하는 학생과 가장 못 하는 학생의 실력 차이가 D 이하여야 한다.
     //조건 2 : 그룹의 효율성 E = (그룹 내의 학생들이 아는 모든 알고리즘의 수 - 그룹 내의 모든 학생들이 아는 알고리즘의 수)*그룹원의 수
 
-    sort(students.begin(), students.end(), cmp);    //실력 기준으로 내림차순 정렬
+    sort(students.begin(), students.end(), cmp);    //실력 기준으로 오름차순 정렬
     
 
     //두 포인터 알고리즘
@@ -70,6 +73,7 @@ int main() {
         int dif = students[high].d - students[low].d;
 
         if (dif <= D) {  //high를 오른쪽으로 이동
+            //n^2 -> 수정
             for (int i = low; i < high; i++) {
                 for (int j = 0; j < students[i].M; j++) {
                     arrK[students[i].A.at(j)]++;

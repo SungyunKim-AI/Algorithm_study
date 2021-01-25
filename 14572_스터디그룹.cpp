@@ -1,32 +1,18 @@
+//태그 : 그리디, 두 포인터
 #include <iostream>
 #include <algorithm>
 #include <vector>
 using namespace std;
 
 struct Student {
-    int M;          //해당 학생이 알고 있는 알고리즘의 수
     int d;          //해당 학생의 실력
-    vector<int> A;  //해당 학생이 알고 있는 알고리즘들 (1 <= Ai <= K)
+    int M;          //해당 학생이 알고 있는 알고리즘들 (1 <= K <= 30)이므로 비트마스크 연산
 } student;
 
-// 학생들을 실력기준으로 오름차순 정렬
-bool cmp(const Student & a, const Student & b) {
-    if (a.d < b.d) return true;
-    else if (a.d == b.d) {
-        if (a.M < b.M) return true;
-    }
-    return false;
-}
-
-//알고리즘 카운트 배열을 확인해서 (그룹 내의 학생들이 아는 모든 알고리즘의 수 - 그룹 내의 모든 학생들이 아는 알고리즘의 수) 반환
-int difCalculater(int arrK[31], int N) {
-    int allAlgo = 0;    //그룹 내의 학생들이 아는 모든 알고리즘의 수
-    int allStud = 0;    //그룹 내의 모든 학생들이 아는 알고리즘의 수
-    for (int i = 1; i <= 30; i++) {
-        if (arrK[i] == N) { allStud++; }
-        if (arrK[i] != 0) { allAlgo++; }
-    }
-    return allAlgo - allStud;
+//원소 개수 계산 함수
+int bitCount(int x) {
+    if (x == 0) return 0;
+    return x % 2 + bitCount(x / 2);
 }
 
 int main() {
@@ -40,22 +26,24 @@ int main() {
     //input
     cin >> N >> K >> D;
     for (int i = 0; i < N; i++) {
-        cin >> student.M >> student.d;
-    
-        for (int j = 0; j < student.M; j++) {
+        int studentM;
+        cin >> studentM >> student.d;
+        for (int j = 0; j < studentM; j++) {
             int Ai;
             cin >> Ai;
-            student.A.push_back(Ai);
+            student.M |= (1 << Ai);     //비트 OR 연산으로 알고리즘 입력
         }
-
         students.push_back(student);
-        student.A.clear();
     }
 
     //조건 1 : 그룹 내에서 가장 잘 하는 학생과 가장 못 하는 학생의 실력 차이가 D 이하여야 한다.
     //조건 2 : 그룹의 효율성 E = (그룹 내의 학생들이 아는 모든 알고리즘의 수 - 그룹 내의 모든 학생들이 아는 알고리즘의 수)*그룹원의 수
 
-    sort(students.begin(), students.end(), cmp);    //실력 기준으로 오름차순 정렬
+    //학생들의 실력 기준으로 오름차순 정렬
+    sort(students.begin(), students.end(),
+        [] (const Student& s1, const Student& s2) -> bool {
+            return s1.d < s2.d;
+    });
     
 
     //두 포인터 알고리즘
@@ -67,26 +55,22 @@ int main() {
     
     int resultE = 0;        //스터디 그룹의 효율성
     int low = 0, high = 1;
-    int arrK[31] = {0, };   //각각의 알고리즘 카운트하는 배열
+    int algoAll = students[low].M;      //학생들이 아는 모든 알고리즘의 수  (OR 연산)
+    int stuAll = students[low].M;       //모든 학생들이 아는 알고리즘의 수  (AND 연산)
 
     while (low <= high && high < N) {
         int dif = students[high].d - students[low].d;
 
         if (dif <= D) {  //high를 오른쪽으로 이동
-            //n^2 -> 수정
-            for (int i = low; i < high; i++) {
-                for (int j = 0; j < students[i].M; j++) {
-                    arrK[students[i].A.at(j)]++;
-                }   
-            }
-            int num = high - low + 1;     //그룹의 학생 수
-            resultE = max(difCalculater(arrK, num) * num, resultE);     //효율성이 더 큰 값으로 갱신
+            algoAll |= students[high].M;       //OR 연산으로 해당 학생이 아는 알고리즘 추가
+            stuAll &= students[high].M;        //AND 연산으로 모든 학생이 아는 알고리즘 연산
+
+            int num = high - low + 1;          //그룹 내 학생 수
+            resultE = max((bitCount(algoAll) - bitCount(stuAll)) * num, resultE);     //효율성이 더 큰 값으로 갱신
             high++;
         } else {        //low를 오른쪽으로 이동
             low++;
-            if (low > high && low < N) {
-                high = low;    
-            } 
+            if (low > high && low < N) { high = low; } 
         }
     }
     

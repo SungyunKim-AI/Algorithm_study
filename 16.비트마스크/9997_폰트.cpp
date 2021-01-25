@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include <string>
 using namespace std;
 
@@ -8,8 +9,9 @@ int result = 0;          // 결과값 저장
 
 void DFS(int idx, int sum) {
 
-    if (idx == (N - 1)) {
-        if (sum == ((1 << 26) - 1)) { result++; }
+    if (idx > (N - 1)) { return; }
+    if (sum == ((1 << 26) - 1)) { 
+        result += pow(2, N - (idx + 1));
         return;
     }
 

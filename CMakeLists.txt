@@ -3,4 +3,4 @@ project(Algorithm_study)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Algorithm_study 14572_스터디그룹.cpp)
+add_executable(Algorithm_study 2011_암호코드.cpp)

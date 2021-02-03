@@ -143,32 +143,32 @@ Algorithm_study/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Algorithm_study.dir/build.make CMakeFiles/Algorithm_study.dir/build
 .PHONY : Algorithm_study/fast
 
-14572_스터디그룹.o: 14572_스터디그룹.cpp.o
+2011_암호코드.o: 2011_암호코드.cpp.o
 
-.PHONY : 14572_스터디그룹.o
+.PHONY : 2011_암호코드.o
 
 # target to build an object file
-14572_스터디그룹.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Algorithm_study.dir/build.make CMakeFiles/Algorithm_study.dir/14572_스터디그룹.cpp.o
-.PHONY : 14572_스터디그룹.cpp.o
+2011_암호코드.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Algorithm_study.dir/build.make CMakeFiles/Algorithm_study.dir/2011_암호코드.cpp.o
+.PHONY : 2011_암호코드.cpp.o
 
-14572_스터디그룹.i: 14572_스터디그룹.cpp.i
+2011_암호코드.i: 2011_암호코드.cpp.i
 
-.PHONY : 14572_스터디그룹.i
+.PHONY : 2011_암호코드.i
 
 # target to preprocess a source file
-14572_스터디그룹.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Algorithm_study.dir/build.make CMakeFiles/Algorithm_study.dir/14572_스터디그룹.cpp.i
-.PHONY : 14572_스터디그룹.cpp.i
+2011_암호코드.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Algorithm_study.dir/build.make CMakeFiles/Algorithm_study.dir/2011_암호코드.cpp.i
+.PHONY : 2011_암호코드.cpp.i
 
-14572_스터디그룹.s: 14572_스터디그룹.cpp.s
+2011_암호코드.s: 2011_암호코드.cpp.s
 
-.PHONY : 14572_스터디그룹.s
+.PHONY : 2011_암호코드.s
 
 # target to generate assembly for a file
-14572_스터디그룹.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Algorithm_study.dir/build.make CMakeFiles/Algorithm_study.dir/14572_스터디그룹.cpp.s
-.PHONY : 14572_스터디그룹.cpp.s
+2011_암호코드.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Algorithm_study.dir/build.make CMakeFiles/Algorithm_study.dir/2011_암호코드.cpp.s
+.PHONY : 2011_암호코드.cpp.s
 
 # Help Target
 help:
@@ -179,9 +179,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Algorithm_study"
-	@echo "... 14572_스터디그룹.o"
-	@echo "... 14572_스터디그룹.i"
-	@echo "... 14572_스터디그룹.s"
+	@echo "... 2011_암호코드.o"
+	@echo "... 2011_암호코드.i"
+	@echo "... 2011_암호코드.s"
 .PHONY : help
 
 

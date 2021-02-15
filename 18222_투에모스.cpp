@@ -1,4 +1,5 @@
 // 분할 정복
+// 규칙 노트 정리 링크 : https://github.com/KimSungYoon-KOK/Algorithm_study/blob/main/note/note_18222.jpeg
 #include <cmath>
 #include <iostream>
 using namespace std;
@@ -22,8 +23,6 @@ void square(long long k, int count) {
     long long exponent = log2(k);
     long long n = pow(2, exponent);
 
-    // 9 -> 8 + 1
-    // 8 -> 8 + 0
     if ((k - n) != 0)
         square((k - n), ++count);
     else

@@ -22,6 +22,8 @@ void square(long long k, int count) {
     long long exponent = log2(k);
     long long n = pow(2, exponent);
 
+    // 9 -> 8 + 1
+    // 8 -> 8 + 0
     if ((k - n) != 0)
         square((k - n), ++count);
     else

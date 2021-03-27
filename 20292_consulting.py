@@ -1,52 +1,58 @@
 """ 
 백준 20292번 : 컨설팅
+
+메모리는 3가지 상태가 있을 수 있다.
+-> READ or WORKING or READY
+WRITE A TO B : A(READ) && B(WORKING)
 """
 
 commands = []
 memory = {} # True : 사용 가능 / False : 사용 불가능
 
-# input
+def WAIT_operator():
+    commands.insert(-1, ['WAIT'])
+    memory.clear()
+
+
 while True:
-    line = input().split()
-    commands.append(line)
-    if line[0] == 'EXIT':
+    # 입력
+    command = input().split()
+    commands.append(command)
+
+    # EXIT 종료
+    if command[0] == 'EXIT':
         break
-    elif line[0] == 'WRITE':
-        memory[line[1]] = True
-        memory[line[3]] = True
-    else:
-        memory[line[1]] = True
 
-for i in range(len(commands)):
-    command = commands[i]
-    # READ with WRITE
-    if command[0] == 'WRITE':
-        if  memory[command[1]] == True:
-            if memory[command[3]] == True:
-                memory[command[1]] = False
-                memory[command[3]] = False
-            elif memory[command[3]] == False:
-                commands.insert(i, ['WAIT'])
-                i += 1
-                for key in memory.keys():
-                    memory[key] = True
+    # WIRTE
+    elif command[0] == 'WRITE':
+        # Memory에 없으면 추가
+        if command[1] not in memory:
+            memory[command[1]] = 'READY'
+        if command[3] not in memory:
+            memory[command[3]] = 'READY'
+
+        # Operation 검사
+        if memory[command[1]] == 'WORKING' or memory[command[3]] != 'READY':
+            WAIT_operator()
         
-        else:
-            commands.insert(i, ['WAIT'])
-            i += 1
-            for key in memory.keys():
-                memory[key] = True
+        memory[command[1]] = 'READ'
+        memory[command[3]] = 'WORKING'
     
+    # READ
     elif command[0] == 'READ':
-        if memory[command[1]] == True:
-            memory[command[1]] = False
-        else:
-            commands.insert(i, ['WAIT'])
-            i += 1
-            for key in memory.keys():
-                memory[key] = True
+        # Memory에 없으면 추가
+        if command[1] not in memory:
+            memory[command[1]] = 'READY'
+
+        # Operation 검사
+        if memory[command[1]] == 'WORKING':
+            WAIT_operator()
+        
+        memory[command[1]] = 'READ'
+    
 
 
+# 출력
 for command in commands:
     print(' '.join(command))
     

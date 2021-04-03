@@ -3,7 +3,7 @@
 """
 
 [N, M] = list(map(int, input().split()))
-mMap = [[0 for row in range(M+2)] for col in range(N+2)]     # input matrix
+mMap = [[0 for col in range(M+2)] for row in range(N+2)]     # input matrix
 # Input
 for i in range(1, N+1):
     mMap[i][1:M+1] = list(map(int, input().split()))
@@ -17,7 +17,7 @@ for i in range(1, N+1):
 # 4. (dir == 0 and col == 1) or (dir == 1 and col == M) 이면 제거
 
 
-dp = [[[101 for dir in range(M+2)] for row in range(N+2)] for col in range(3)]
+dp = [[[101 for col in range(M+2)] for row in range(N+2)] for dir in range(3)]
 for i in range(3):
     dp[i][1][:] = mMap[1][:]
 

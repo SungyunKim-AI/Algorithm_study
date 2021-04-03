@@ -7,10 +7,12 @@ def solution(a):
     result = [False for i in range(len(a))]
     minLeft, minRight = 1000000001, 1000000001
     for i in range(len(a)):
+        # 왼쪽에서 오는 인덱스
         if a[i] < minLeft:
             minLeft = a[i]
             result[i] = True
         
+        # 오른쪽에서 오는 인덱스
         if a[-(1+i)] < minRight:
             minRight = a[-(1+i)]
             result[-(1+i)] = True

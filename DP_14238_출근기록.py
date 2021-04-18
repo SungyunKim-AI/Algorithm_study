@@ -10,7 +10,12 @@ C는 출근한 다음날과 다다음날을 반드시 쉬어야 한다.
 DP[사용한 A의 개수][사용한 B의 개수][사용한 C의 개수][전전날 출근한 사람][전날 출근한 사람] -> 가능 여부 True, False 저장
 """
 
-def DFS(a, b, c):
+def DFS(a, b, c, prev2, prev1):
+    # 기저 사례1 : a, b, c 개수가 다 차면 return True
+    if [a, b, c] == count:
+        return True
+    
+    # dksdflkajs;odifja;lsdjflaks
 
     # 기저 사례2 : 메모이제이션 True 이면 이미 확인 한 경우의 수 -> return False
     if dp[a][b][c][prev2][prev1] == True:

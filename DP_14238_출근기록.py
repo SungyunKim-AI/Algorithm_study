@@ -14,6 +14,8 @@ def DFS(a, b, c, prev2, prev1):
     # 기저 사례1 : a, b, c 개수가 다 차면 return True
     if [a, b, c] == count:
         return True
+    
+    # dksdflkajs;odifja;lsdjflaks
 
     # 기저 사례2 : 메모이제이션 True 이면 이미 확인 한 경우의 수 -> return False
     if dp[a][b][c][prev2][prev1] == True:
